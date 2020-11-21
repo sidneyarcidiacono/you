@@ -2,14 +2,43 @@
 
 {% block content %}
 
-<h2>Your Challenges</h2>
+{% if new_challenges or completed_challenges %}
 
-<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-  <div class="card-header">Challenge #1</div>
-  <div class="card-body">
-    <h4 class="card-title">Dummy Challenge</h4>
-    <p class="card-text">Come do some workout thing for a month.</p>
-  </div>
-</div>
+  {% for new_challenge in new_challenges %}
+
+    <div class="container m-3">
+
+      <h2>Upcoming Challenges</h2>
+
+      <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
+        <div class="card-header">{{ new_challenge.title }}</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ new_challenge.title }}</h4>
+          <p class="card-text">{{ new_challenge.dates }}</p>
+        </div>
+      </div>
+
+    </div>
+  {% endfor %}
+
+  {% for completed_challenge in completed_challenges %}
+    <h2>Completed Challenges</h2>
+
+    <div class="container m-3">
+      <div class="card border-primary mb-3" style="max-width: 100%;">
+        <div class="card-header">{{ completed_challenge.title }}</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ completed_challenge.title }}</h4>
+          <p class="card-text">{{ completed_challenge.dates }}</p>
+        </div>
+      </div>
+    </div>
+
+  {% endfor %}
+{% else %}
+
+  <h3>No challenges yet!</h3>
+
+{% endif %}
 
 {% endblock %}
