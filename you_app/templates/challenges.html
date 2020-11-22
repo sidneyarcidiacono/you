@@ -21,13 +21,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+        <form action="{{ url_for('main.challenges') }}" method="POST">
+          <label for="title">Challenge Title</label>
+          <input type="text" name="title" id="title">
+          <label for="dates">Dates</label>
+          <input type="text" name="dates" id="dates">
       </div>
       <div class="modal-footer">
-        <form action="{{ url_for('main.challenges') }}" method="POST">
-          <button type="submit" class="btn btn-primary" id="save-add-challenge">Save changes</button>
-        </form>
+        <button type="submit" class="btn btn-primary" id="save-add-challenge">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="stop-add-challenge">Close</button>
+      </form>
       </div>
     </div>
   </div>

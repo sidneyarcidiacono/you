@@ -1,5 +1,5 @@
 """Import modules & packages."""
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request, redirect, url_for
 from you_app.models import Challenges
 from you_app import db
 
@@ -12,21 +12,16 @@ def homepage():
     return render_template("index.html")
 
 
-@main.route("/challenges")
+@main.route("/challenges", methods=["GET", "POST"])
 def challenges():
     """Show user available and current challenges."""
-    new_challenge = Challenges(
-        title="Test Challenge", dates="June 1, 2020 - July 1, 2020"
-    )
-    completed_challenge = Challenges(
-        title="Finished Challenge",
-        dates="May 1, 2020 - May 5, 2020",
-        completed=True,
-    )
-    db.session.add(new_challenge)
-    db.session.add(completed_challenge)
-    db.session.commit()
-
+    if request.method == "POST":
+        title = request.form.get("title")
+        dates = request.form.get("dates")
+        new_challenge = Challenges(title=title, dates=dates)
+        db.session.add(new_challenge)
+        db.session.commit()
+        return redirect(url_for("main.challenges"))
     new_challenges = Challenges.query.filter_by(completed=False).all()
     completed_challenges = Challenges.query.filter_by(completed=True).all()
 
