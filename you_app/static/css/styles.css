@@ -14,3 +14,23 @@
   display: block;
   pointer-events: all;
 }
+
+.profile-pic {
+  max-width: 65px;
+  max-height: 65px;
+  border-radius: 15px;
+}
+
+.img-btn {
+  background-color: transparent;
+  border: none;
+  padding-left: 15px;
+}
+
+.img-btn:hover {
+  opacity: 50%;
+}
+
+.invisible {
+  display: none;
+}
