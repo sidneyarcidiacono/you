@@ -6,7 +6,7 @@ from flask import (
     redirect,
     url_for,
 )
-from flask_login import login_user
+from flask_login import login_user, login_required, logout_user
 from you_app import db
 from you_app.models import User
 
@@ -56,3 +56,12 @@ def register():
             flash("You have successfully signed up! You are now logged in.")
             return redirect(url_for("main.homepage"))
     return render_template("register.html")
+
+
+@user.route("/logout")
+@login_required
+def logout():
+    """Log out user."""
+    logout_user()
+    flash("You have successfully logged out!")
+    return redirect(url_for("main.homepage"))
