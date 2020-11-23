@@ -39,3 +39,10 @@
   max-width: 45px;
   max-height: 45px;
 }
+
+#open-add-post {
+  background-color: transparent;
+  height: 45px;
+  width: 45px;
+  border: none;
+}

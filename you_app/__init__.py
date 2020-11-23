@@ -14,9 +14,11 @@ login_manager.login_view = "user.login"
 
 from you_app.main.routes import main
 from you_app.user.routes import user
+from you_app.post.routes import post
 
 app.register_blueprint(main)
 app.register_blueprint(user)
+app.register_blueprint(post)
 
 with app.app_context():
     db.create_all()
