@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block head %}
-  <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
 
 <div class="container-fluid p-0">
   <div class="row w-100 m-0 justify-content-between">
-    <div class="col-md-3 mr-auto ml-auto mt-4 mb-4 text-center">
+    <div class="col-md-9 mr-auto ml-auto mt-4 mb-4 text-center">
       <h2>Welcome to You</h2>
 
       <!-- BACKDROP, DARKENS PAGE W/ MODAL OPEN -->
@@ -44,39 +44,61 @@
           </div>
         </div>
       </div>
-      <!-- AT A GLANCE CARD -->
-    </div>
-    <div class="col-md-3 p-0 invisible" id="at-a-glance">
-      <div class="card mb-3">
-        <h3 class="card-header">You, at a glance</h3>
-        <div class="card-body">
-          <h5 class="card-title">Water Intake</h5>
-          <h6 class="card-subtitle text-muted">24 oz, 33% to goal</h6>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
-          style="font-size:1.125rem;text-anchor:middle">
-          <rect width="100%" height="100%" fill="#868e96"></rect>
-          <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-        </svg>
-        <div class="card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-        <div class="card-body">
-          <a href="{{ url_for('main.progress') }}" class="card-link">See Progress</a>
-          <a href="{{ url_for('main.goals') }}" class="card-link">Check your goals</a>
-        </div>
-        <div class="card-footer text-muted">
-          Last updated: 1 hr ago
+      <!-- POST CARDS -->
+      {% for post in news_feed %}
+          <div class="card mb-3 w-75 ml-auto mr-auto">
+            <div class="card-header text-left">
+              <div class="row w-100 align-items-center">
+                <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3">
+                <h5 class="mr-3">@{{ post.user.username }}</h5>
+                <h7 class="card-subtitle text-muted">Fake location tag</h7>
+              </div>
+            </div>
+            {% if post.image %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
+              style="font-size:1.125rem;text-anchor:middle">
+              <rect width="100%" height="100%" fill="#868e96"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+            </svg>
+            {% endif %}
+            <div class="card-body">
+              <p class="card-text">{{ post.content }}</p>
+            </div>
+          </div>
+        {% endfor %}
+        <!-- AT A GLANCE CARD -->
+      </div>
+      <div class="col-md-3 p-0 invisible" id="at-a-glance">
+        <div class="card mb-3">
+          <h3 class="card-header">You, at a glance</h3>
+          <div class="card-body">
+            <h5 class="card-title">Water Intake</h5>
+            <h6 class="card-subtitle text-muted">24 oz, 33% to goal</h6>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
+            style="font-size:1.125rem;text-anchor:middle">
+            <rect width="100%" height="100%" fill="#868e96"></rect>
+            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+          </svg>
+          <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+          <div class="card-body">
+            <a href="{{ url_for('main.progress') }}" class="card-link">See Progress</a>
+            <a href="{{ url_for('main.goals') }}" class="card-link">Check your goals</a>
+          </div>
+          <div class="card-footer text-muted">
+            Last updated: 1 hr ago
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 

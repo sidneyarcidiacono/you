@@ -1,6 +1,6 @@
 """Import modules & packages."""
 from flask import render_template, Blueprint, request, redirect, url_for
-from you_app.models import Challenges
+from you_app.models import Challenges, Post, User
 from you_app import db
 
 main = Blueprint("main", __name__)
@@ -9,7 +9,8 @@ main = Blueprint("main", __name__)
 @main.route("/")
 def homepage():
     """Show user the homepage."""
-    return render_template("index.html")
+    news_feed = Post.query.all()
+    return render_template("index.html", news_feed=news_feed)
 
 
 @main.route("/challenges", methods=["GET", "POST"])
