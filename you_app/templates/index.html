@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 
+{% block head %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+{% endblock %}
+
 {% block content %}
 
 <div class="container-fluid p-0">
   <div class="row w-100 m-0 justify-content-between">
-    <div class="col-md-3 mr-auto ml-auto mt-4 mb-4">
+    <div class="col-md-3 mr-auto ml-auto mt-4 mb-4 text-center">
       <h2>Welcome to You</h2>
-      <button type="button" id="open-add-post"><img src="{{ url_for('static', filename='assets/unchecked_add_button.png') }}" alt="plus shaped button to add post"></button>
+
+      <!-- BACKDROP, DARKENS PAGE W/ MODAL OPEN -->
       <div class="backdrop" id="post-add-backdrop"></div>
-      <div class="modal invisible" id="add-post-modal">
+
+      <!-- BUTTON TO OPEN MODAL -->
+      <button type="button" class="img-btn small" id="open-add-post"><img id="add-post-btn" src="{{ url_for('static', filename='assets/unchecked_add_button.png') }}" alt="plus shaped button to add post"></button>
+
+      <!-- ADD POST MODAL -->
+      <div class="modal" id="add-post-modal">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -18,9 +28,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="{{ url_for('main.challenges') }}" method="POST">
+              <form action="{{ url_for('post.add_post') }}" method="POST">
                 <div class="row w-100 justify-content-center">
-                  <div class="col-md-4">
+                  <div class="col-md-9">
                     <label for="status">Keep us motivated...</label>
                     <input class="form-control" type="textarea" name="status" id="status">
                   </div>
@@ -34,6 +44,7 @@
           </div>
         </div>
       </div>
+      <!-- AT A GLANCE CARD -->
     </div>
     <div class="col-md-3 p-0 invisible" id="at-a-glance">
       <div class="card mb-3">

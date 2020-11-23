@@ -27,6 +27,11 @@
   padding-left: 15px;
 }
 
+.img-btn img {
+  width: 50px;
+  height: 50px;
+}
+
 .img-btn:hover {
   opacity: 50%;
 }
@@ -38,11 +43,4 @@
 #settings-dropdown {
   max-width: 45px;
   max-height: 45px;
-}
-
-#open-add-post {
-  background-color: transparent;
-  height: 45px;
-  width: 45px;
-  border: none;
 }
