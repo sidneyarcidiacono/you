@@ -14,6 +14,7 @@
 
 <body>
   <header>
+    <!-- MAIN NAV ELEMENTS -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand navbar-item active" href="{{ url_for('main.homepage') }}">You</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +33,7 @@
             <a class="nav-link" href="{{ url_for('main.progress') }}">Progress</a>
           </li>
         </ul>
+        <!-- SETTINGS DROPDOWN -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ url_for('static', filename='assets/settings.png') }}" alt="Gear icon" id="settings-dropdown"></a>
           <div class="dropdown-menu">
@@ -45,16 +47,19 @@
             {% endif %}
           </div>
         </li>
+        <!-- SEARCH BAR -->
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <!-- PROFILE IMAGE BUTTON IF LOGGED IN USER -->
         {% if current_user.is_authenticated %}
         <button type="button" id="open-glance" class="img-btn"><img src="{{ url_for('static', filename='assets/default_profile_pic.jpg')}}" alt="Woman in fitness gear outside" class="profile-pic"></button>
         {% endif %}
       </div>
     </nav>
     </nav>
+    <!-- INITIALIZE FLASH MESSAGES -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -64,6 +69,7 @@
     {% endwith %}
   </header>
   {% block content %}{% endblock %}
+  <!-- FOOTER -->
   <footer class="page-footer font-small">
     <div class="footer-copyright text-center py-3">
       © Copyright Sid Arcidiacono 2020
