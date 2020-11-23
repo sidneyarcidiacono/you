@@ -7,6 +7,7 @@ from flask import (
     url_for,
 )
 from flask_login import login_user
+from you_app import db
 from you_app.models import User
 
 user = Blueprint("user", __name__)
@@ -28,3 +29,30 @@ def login():
         elif not user.verify_password(password):
             flash("Incorrect password, please try again.")
     return render_template("login.html")
+
+
+@user.route("/signup", methods=["GET", "POST"])
+def register():
+    """Register (sign up) new user."""
+    if request.method == "POST":
+        email = request.form.get("email")
+        username = request.form.get("username")
+        password = request.form.get("password")
+        pass_confirm = request.form.get("confirm-password")
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash(
+                """
+                A user already exists with that email address.
+                Do you need to log in?
+                """
+            )
+        elif password == pass_confirm:
+            new_user = User(email=email, username=username)
+            new_user.set_password(password)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user)
+            flash("You have successfully signed up! You are now logged in.")
+            return redirect(url_for("main.homepage"))
+    return render_template("register.html")

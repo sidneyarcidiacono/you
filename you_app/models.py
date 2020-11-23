@@ -30,9 +30,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image = db.Column(db.String(30), nullable=True)
     content = db.Column(db.String(200), nullable=False)
-    user = db.relationship(
-        "User", cascade="all, delete", backref="post", lazy=True
-    )
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     likes = db.Column(db.Integer, default=0)
 
 
@@ -44,6 +42,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(30), nullable=False)
     password = db.Column(db.String(120), nullable=True)
     is_admin = db.Column(db.Boolean, default=False)
+    posts = db.relationship(
+        "Post", cascade="all, delete", backref="user", lazy=True
+    )
     avatar = avatar = db.Column(
         db.String(30),
         nullable=False,
