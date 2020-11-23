@@ -46,6 +46,13 @@
   display: none;
 }
 
+.challenge-img {
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+  padding: 0;
+}
+
 #settings-dropdown {
   max-width: 45px;
   max-height: 45px;

@@ -22,6 +22,7 @@ class Challenges(db.Model):
     title = db.Column(db.String(40), nullable=False)
     dates = db.Column(db.String(50), nullable=False)
     completed = db.Column(db.Boolean, default=False)
+    image = db.Column(db.String(30), nullable=True)
 
 
 class Post(db.Model):

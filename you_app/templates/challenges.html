@@ -5,14 +5,17 @@
 {% endblock %}
 
 {% block content %}
+<!-- BACKDROP FOR MODAL OPEN -->
 <div class="backdrop" id="modal-backdrop"></div>
 
+<!-- ADD CHALLENGE BUTTON -->
 <div class="row justify-content-center m-3">
   <div class="col-md-6 d-flex align-items-center">
     <button type="button" class="btn btn-primary m-auto" id="start-modal-btn">Add New Challenge</button>
   </div>
 </div>
 
+<!-- ADD CHALLENGE MODAL -->
 <div class="row w-100">
   <div class="modal" id="add-challenge-modal">
     <div class="modal-dialog" role="document">
@@ -24,7 +27,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ url_for('main.challenges') }}" method="POST">
+          <form action="{{ url_for('challenge.challenges') }}" method="POST" enctype="multipart/form-data">
             <div class="row w-100 justify-content-center">
               <div class="col-md-4">
                 <label for="title">Challenge Title</label>
@@ -35,6 +38,11 @@
                 <input class="form-control" type="text" name="dates" id="dates">
               </div>
             </div>
+            <div class="col-md-4">
+              <label for="image">Image</label>
+              <input class="form-control" type="file" name="image" id="image">
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" id="save-add-challenge">Save changes</button>
@@ -46,6 +54,7 @@
   </div>
 </div>
 
+<!-- ACTIVE CHALLENGE CARDS -->
 {% if new_challenges or completed_challenges %}
 
 <div class="row justify-content-center">
@@ -55,17 +64,21 @@
 {% for new_challenge in new_challenges %}
 <div class="row w-100 justify-content-center">
   <div class="container m-3">
-    <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
-      <div class="card-header">{{ new_challenge.title }}</div>
-      <div class="card-body">
-        <h4 class="card-title">{{ new_challenge.title }}</h4>
-        <p class="card-text">{{ new_challenge.dates }}</p>
+    <div class="row text-white bg-primary mb-3 w-100 rounded">
+      <div class="col-md-4 text-left">
+        <h3 class="card-title p-4">{{ new_challenge.title }}</h3>
+        <p class="card-text p-4">{{ new_challenge.dates }}</p>
+      </div>
+      <div class="col-md-3 ml-auto mr-0 p-0">
+        <!-- <button type="button" id="join-challenge"><img class="img-btn small" src="{{ url_for('static', filename='assets/unchecked_add_button.png') }}" alt="plus shaped button"></button> -->
+        <img class="challenge-img h-100" src="{{ url_for('static', filename='assets/' + new_challenge.image) }}" alt="{{ new_challenge.title }}">
       </div>
     </div>
   </div>
 </div>
 {% endfor %}
 
+<!-- COMPLETED CHALLENGE CARDS -->
 <div class="row justify-content-center">
   <h2>Completed Challenges</h2>
 </div>
@@ -73,11 +86,13 @@
 {% for completed_challenge in completed_challenges %}
 <div class="row w-100 justify-content-center">
   <div class="container m-3">
-    <div class="card border-primary mb-3" style="max-width: 100%;">
-      <div class="card-header">{{ completed_challenge.title }}</div>
-      <div class="card-body">
-        <h4 class="card-title">{{ completed_challenge.title }}</h4>
-        <p class="card-text">{{ completed_challenge.dates }}</p>
+    <div class="row text-white border-primary mb-3 w-100 rounded">
+      <div class="col-md-4 text-left">
+        <h3 class="card-title p-4">{{ new_challenge.title }}</h3>
+        <p class="card-text p-4">{{ new_challenge.dates }}</p>
+      </div>
+      <div class="col-md-3 ml-auto mr-0 p-0">
+        <img class="challenge-img h-100" src="{{ url_for('static', filename='assets/' + new_challenge.image) }}" alt="{{ new_challenge.title }}">
       </div>
     </div>
   </div>
@@ -86,6 +101,7 @@
 {% endfor %}
 {% else %}
 
+<!-- DISPLAY IF THERE ARE NO CHALLENGES TO SHOW -->
 <div class="row w-100 justify-content-center mt-4 mb-4">
   <h3 class="text-center">No challenges yet!</h3>
 </div>
