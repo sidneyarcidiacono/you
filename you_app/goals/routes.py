@@ -21,7 +21,8 @@ goal = Blueprint("goal", __name__)
 @login_required
 def goals():
     """Show user visual representations of their goals."""
-    return render_template("goals.html")
+    goals = Goal.query.filter_by(user_id=current_user.id).all()
+    return render_template("goals.html", goals=goals)
 
 
 @goal.route("/add_goal", methods=["POST"])

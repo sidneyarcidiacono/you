@@ -33,15 +33,23 @@ const saveAddGoalHandler = () => {
 // Handlers for showing and hiding portions of add goal form
 const finishAddGoalHandler = () => {
   const goalLabel = document.getElementById('goal-label')
+  const baselineLabel = document.getElementById('baseline-label')
   const hiddenForm = document.getElementById('goal-form-part-two')
   if (category.value == "water-intake") {
-    goalLabel.innerHTML = "How many ounces per day?"
+    goalLabel.innerHTML = "How many oz per day?"
+    baselineLabel.innerHTML = "How many oz per day do you drink right now?"
   } else if (category.value == "steps") {
     goalLabel.innerHTML = "How many steps per day?"
+    baselineLabel.innerHTML = "How many steps per day do you take right now?"
   } else if (category.value == "heart-rate") {
     goalLabel.innerHTML = "What would you like your heart rate to be at rest? (Beats per minute)"
+    baselineLabel.innerHTML = "About what is your current resting heart rate?"
   } else if (category.value == "calories") {
     goalLabel.innerHTML = "How many calories per day?"
+    baselineLabel.innerHTML = "About how many calories a day do you eat currently?"
+  } else if (category.value == "weight") {
+    goalLabel.innerHTML = "What is your goal weight in pounds?"
+    baselineLabel.innerHTML = "What is your current weight in pounds?"
   }
   hiddenForm.classList.remove('invisible')
 }

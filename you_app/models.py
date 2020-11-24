@@ -84,6 +84,7 @@ class Goal(db.Model):
     goal = db.Column(db.Integer, nullable=False, default=0)
     start_date = db.Column(db.DateTime, default=datetime.now)
     end_date = db.Column(db.DateTime, default=datetime.now)
+    user_baseline = db.Column(db.Integer, default=0, nullable=False)
     percent_complete = db.Column(db.Integer, default=0)
     percentile_friends = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))

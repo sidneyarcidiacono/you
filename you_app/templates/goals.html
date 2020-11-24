@@ -30,7 +30,7 @@
           <div class="modal-body">
             <form action="{{ url_for('goal.add_goal') }}" method="POST" enctype="multipart/form-data" id="add-goal-form">
               <div class="row w-100 justify-content-center">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label for="goal-category">Category</label>
                   <select class="form-control" name="category" id="category-select" form="add-goal-form">
                     <option value="pick-one">Select One</option>
@@ -38,14 +38,17 @@
                     <option value="steps">Steps</option>
                     <option value="heart-rate">Resting Heart Rate</option>
                     <option value="calories">Calories</option>
+                    <option value="weight">Weight</option>
                   </select>
                   <div class="invisible" id="goal-form-part-two">
                     <label for="goal" id="goal-label">Placeholder</label>
                     <input class="form-control" type="number" name="goal" id="goal">
-                    <label for="start-date">Start Date</label>
-                    <input class="form-control" type="date" name="start-date" id="start-date">
-                    <label for="end-date">End Date</label>
-                    <input class="form-control" type="date" name="end-date" id="end-date">
+                    <label for="baseline" id="baseline-label">Baseline</label>
+                    <input class="form-control" type="number" name="baseline" id="baseline">
+                    <label for="start-date">Start Date (mm-dd-yyyy)</label>
+                    <input class="form-control" type="date" name="start-date" id="start-date" placeholder="Date I start on this goal">
+                    <label for="end-date">End Date (mm-dd-yyyy)</label>
+                    <input class="form-control" type="date" name="end-date" id="end-date" placeholder="Date I accomplish it by">
                   </div>
                 </div>
               </div>
@@ -60,5 +63,45 @@
     </div>
   </div>
 </div>
+{% if goals %}
+  {% for goal in goals %}
+  <div class="row w-100">
+    <div class="col-md-4 ml-auto mr-auto mb-4">
+      <div class="card text-white bg-secondary mb-3">
+        {% if goal.category == "water-intake" %}
+        <div class="card-header">Water Intake</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ goal.goal }} oz per day</h4>
+        {% elif goal.category == "steps" %}
+        <div class="card-header">Steps</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ goal.goal }} steps per day</h4>
+        {% elif goal.category == "heart-rate" %}
+        <div class="card-header">Resting Heart Rate</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ goal.goal }} beats per minute</h4>
+        {% elif goal.category == "calories" %}
+        <div class="card-header">Calories</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ goal.goal }} calories per day</h4>
+        {% elif goal.category == "weight" %}
+        <div class="card-header">Weight</div>
+        <div class="card-body">
+          <h4 class="card-title">{{ goal.goal }} lbs</h4>
+        {% endif %}
+          <p class="card-text">You started working towards this goal on: {{ goal.start_date.strftime('%b %d, %Y') }}</p>
+          <p class="card-text">You plan to achieve this goal by: {{ goal.end_date.strftime('%b %d, %Y') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+<div class="row w-100 justify-content-center">
+  <div class="col-md-6 text-center">
+    <h5 class="log-in-msg">You haven't added any goals yet. Try adding one!</h5>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}
