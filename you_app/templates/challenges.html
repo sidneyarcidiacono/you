@@ -69,8 +69,8 @@
         <h3 class="card-title p-4">{{ new_challenge.title }}</h3>
         <p class="card-text p-4">{{ new_challenge.dates }}</p>
       </div>
-      <div class="col-md-3 ml-auto mr-0 p-0">
-        <!-- <button type="button" id="join-challenge"><img class="img-btn small" src="{{ url_for('static', filename='assets/unchecked_add_button.png') }}" alt="plus shaped button"></button> -->
+      <div class="col-md-3 ml-auto mr-0 p-0 d-flex flex-row">
+        <button type="button" id="join-challenge" class="img-btn small"><img src="{{ url_for('static', filename='assets/orange_add_plus.png') }}" alt="plus shaped button"></button>
         <img class="challenge-img h-100" src="{{ url_for('static', filename='assets/' + new_challenge.image) }}" alt="{{ new_challenge.title }}">
       </div>
     </div>
