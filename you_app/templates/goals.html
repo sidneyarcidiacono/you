@@ -7,14 +7,13 @@
 {% block content %}
 
 <div class="row w-100 justify-content-center m-4">
-  <!-- BACKDROP FOR MODAL OPEN -->
-  <div class="backdrop" id="modal-backdrop"></div>
-  <h2>Your Goals</h2>
-  <!-- ADD GOAL BUTTON -->
-  <div class="row justify-content-center m-3">
-    <div class="col-md-6 d-flex align-items-center">
-      <button type="button" class="btn btn-primary m-auto" id="start-modal-btn">Add New Goal</button>
-    </div>
+  <div class="col-md-6 justify-content-center text-center">
+
+    <!-- BACKDROP FOR MODAL OPEN -->
+    <div class="backdrop" id="modal-backdrop"></div>
+    <h2 class="mb-4">Your Goals</h2>
+    <!-- ADD GOAL BUTTON -->
+    <button type="button" class="btn btn-primary m-auto" id="start-modal-btn">Add New Goal</button>
   </div>
 
   <!-- ADD GOAL MODAL -->
@@ -29,38 +28,37 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="{{ url_for('challenge.challenges') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url_for('goal.add_goal') }}" method="POST" enctype="multipart/form-data" id="add-goal-form">
               <div class="row w-100 justify-content-center">
                 <div class="col-md-4">
-                  <input type="radio" id="water-intake" name="category" value="water-intake">
-                  <label for="water-intake">Water Intake</label><br>
-                  <input type="radio" id="calories" name="category" value="calories">
-                  <label for="calories">Calories</label><br>
-                  <input type="radio" id="steps" name="category" value="steps">
-                  <label for="steps">Steps</label>
-                  <input type="radio" id="heart-rate" name="category" value="heart-rate">
-                  <label for="heart-rate">Resting Heart Rate</label>
-                </div>
-                <div class="col-md-4">
-                  <label for="start-date">Start Date</label>
-                  <input class="form-control" type="datepicker" name="start-date" id="start-date">
-                </div>
-                <div class="col-md-4">
-                  <label for="end-date">End Date</label>
-                  <input class="form-control" type="datepicker" name="end-date" id="end-date">
+                  <label for="goal-category">Category</label>
+                  <select class="form-control" name="category" id="category-select" form="add-goal-form">
+                    <option value="pick-one">Select One</option>
+                    <option value="water-intake">Water Intake</option>
+                    <option value="steps">Steps</option>
+                    <option value="heart-rate">Resting Heart Rate</option>
+                    <option value="calories">Calories</option>
+                  </select>
+                  <div class="invisible" id="goal-form-part-two">
+                    <label for="goal" id="goal-label">Placeholder</label>
+                    <input class="form-control" type="number" name="goal" id="goal">
+                    <label for="start-date">Start Date</label>
+                    <input class="form-control" type="datepicker" name="start-date" id="start-date">
+                    <label for="end-date">End Date</label>
+                    <input class="form-control" type="datepicker" name="end-date" id="end-date">
+                  </div>
                 </div>
               </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="save-add-goal">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="stop-add-goal">Close</button>
-          </form>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="save-add-goal">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="stop-add-goal">Close</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 {% endblock %}
