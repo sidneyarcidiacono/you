@@ -27,10 +27,10 @@
             <a class="nav-link" href="{{ url_for('challenge.challenges') }}">Challenges</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('main.goals') }}">Goals</a>
+            <a class="nav-link" href="{{ url_for('goal.goals') }}">Goals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('main.progress') }}">Progress</a>
+            <a class="nav-link" href="{{ url_for('progress.progress_page') }}">Progress</a>
           </li>
         </ul>
         <!-- SETTINGS DROPDOWN -->
@@ -60,13 +60,17 @@
     </nav>
     </nav>
     <!-- INITIALIZE FLASH MESSAGES -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <p>{{ message }}</p>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    <div class="row text-center w-100">
+      <div class="col-md-6 text-center">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
   </header>
   {% block content %}{% endblock %}
   <!-- FOOTER -->

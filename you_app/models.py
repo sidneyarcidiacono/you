@@ -2,7 +2,7 @@
 from you_app import db, login_manager
 from flask_login import UserMixin
 from passlib.hash import sha256_crypt
-from sqlalchemy.orm import backref
+from datetime import datetime
 
 
 @login_manager.user_loader
@@ -74,3 +74,15 @@ class Post(db.Model):
     content = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     likes = db.Column(db.Integer, default=0)
+
+
+class Goal(db.Model):
+    """Model for user goals."""
+
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(40), nullable=False)
+    start_date = db.Column(db.DateTime, default=datetime.now)
+    end_date = db.Column(db.DateTime, default=datetime.now)
+    percent_complete = db.Column(db.Integer, default=0)
+    percentile_friends = db.Column(db.Integer, default=0)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))

@@ -16,6 +16,7 @@ challenge = Blueprint("challenge", __name__)
 
 
 @challenge.route("/challenges", methods=["GET", "POST"])
+@login_required
 def challenges():
     """Show user available and current challenges."""
     if request.method == "POST":

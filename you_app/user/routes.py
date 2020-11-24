@@ -54,7 +54,8 @@ def register():
             db.session.commit()
             login_user(new_user)
             flash("You have successfully signed up! You are now logged in.")
-            return redirect(url_for("main.homepage"))
+            flash("What can we help You accomplish? Add your goals here!")
+            return redirect(url_for("goal.goals"))
     return render_template("register.html")
 
 

@@ -1,9 +1,66 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/goal.js')}}" defer></script>
+{% endblock %}
+
 {% block content %}
 
 <div class="row w-100 justify-content-center m-4">
+  <!-- BACKDROP FOR MODAL OPEN -->
+  <div class="backdrop" id="modal-backdrop"></div>
   <h2>Your Goals</h2>
+  <!-- ADD GOAL BUTTON -->
+  <div class="row justify-content-center m-3">
+    <div class="col-md-6 d-flex align-items-center">
+      <button type="button" class="btn btn-primary m-auto" id="start-modal-btn">Add New Goal</button>
+    </div>
+  </div>
+
+  <!-- ADD GOAL MODAL -->
+  <div class="row w-100">
+    <div class="modal" id="add-goal-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add a Goal!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" id="x-goal-button">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('challenge.challenges') }}" method="POST" enctype="multipart/form-data">
+              <div class="row w-100 justify-content-center">
+                <div class="col-md-4">
+                  <input type="radio" id="water-intake" name="category" value="water-intake">
+                  <label for="water-intake">Water Intake</label><br>
+                  <input type="radio" id="calories" name="category" value="calories">
+                  <label for="calories">Calories</label><br>
+                  <input type="radio" id="steps" name="category" value="steps">
+                  <label for="steps">Steps</label>
+                  <input type="radio" id="heart-rate" name="category" value="heart-rate">
+                  <label for="heart-rate">Resting Heart Rate</label>
+                </div>
+                <div class="col-md-4">
+                  <label for="start-date">Start Date</label>
+                  <input class="form-control" type="datepicker" name="start-date" id="start-date">
+                </div>
+                <div class="col-md-4">
+                  <label for="end-date">End Date</label>
+                  <input class="form-control" type="datepicker" name="end-date" id="end-date">
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="save-add-goal">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="stop-add-goal">Close</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 {% endblock %}
