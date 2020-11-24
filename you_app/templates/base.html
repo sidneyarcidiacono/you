@@ -37,10 +37,10 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ url_for('static', filename='assets/settings.png') }}" alt="Gear icon" id="settings-dropdown"></a>
           <div class="dropdown-menu">
+            {% if current_user.is_authenticated %}
             <a class="dropdown-item" href="#">Settings</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>
-            {% if current_user.is_authenticated %}
               <a class="dropdown-item" href="{{ url_for('user.logout') }}">Log Out</a>
             {% else %}
               <a class="dropdown-item" href="{{ url_for('user.login') }}">Log In</a>
