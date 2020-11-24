@@ -33,11 +33,13 @@ def add_goal():
     goal = request.form.get("goal")
     start_date = datetime.strptime(request.form.get("start-date"), "%m-%d-%Y")
     end_date = datetime.strptime(request.form.get("end-date"), "%m-%d-%Y")
+    baseline = request.form.get("baseline")
     new_goal = Goal(
         category=category,
         goal=goal,
         start_date=start_date,
         end_date=end_date,
+        user_baseline=baseline,
         user_id=current_user.id,
     )
     db.session.add(new_goal)
