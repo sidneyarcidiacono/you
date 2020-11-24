@@ -1,5 +1,12 @@
 """Module & package import."""
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import (
+    Blueprint,
+    render_template,
+    redirect,
+    url_for,
+    request,
+    flash,
+)
 from flask_login import current_user, login_required
 from you_app import db
 from you_app.models import Challenges
@@ -38,5 +45,12 @@ def join_challenge():
     if challenge.users:
         challenge.users.append(current_user)
         db.session.commit()
-    challenge.users = [current_user]
+    if current_user.challenges:
+        current_user.challenges.append(challenge)
+        db.session.commit()
+    else:
+        current_user.challenges = [challenge]
+        challenge.users = [current_user]
+        db.session.commit()
+    flash("Challenge joined!")
     return redirect(url_for("challenge.challenges"))

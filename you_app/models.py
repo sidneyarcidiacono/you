@@ -24,21 +24,14 @@ class Challenges(db.Model):
     dates = db.Column(db.String(50), nullable=False)
     completed = db.Column(db.Boolean, default=False)
     image = db.Column(db.String(30), nullable=True)
-    users = db.relationship("User", secondary="user_challenge_link")
+    users = db.relationship("User", secondary="joined_challenges")
 
 
-class UserChallengeLink(db.Model):
-    """Joining table for product and cart."""
-
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    challenge_id = db.Column(db.Integer, db.ForeignKey("challenges.id"))
-    user = db.relationship(
-        "User", backref=backref("link", cascade="all, delete-orphan")
-    )
-    challenge = db.relationship(
-        "Challenges", backref=backref("link", cascade="all, delete-orphan")
-    )
+joined_challenges = db.Table(
+    "joined_challenges",
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
+    db.Column("challenges_id", db.Integer, db.ForeignKey("challenges.id")),
+)
 
 
 class User(db.Model, UserMixin):
@@ -57,9 +50,7 @@ class User(db.Model, UserMixin):
         nullable=False,
         default="default_profile_pic.jpg",
     )
-    challenges = db.relationship(
-        "Challenges", secondary="user_challenge_link"
-    )
+    challenges = db.relationship("Challenges", secondary="joined_challenges")
 
     def set_is_admin(self):
         """Set is_admin to True under a specific condition."""

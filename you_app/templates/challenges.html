@@ -70,7 +70,7 @@
         <p class="card-text p-4">{{ new_challenge.dates }}</p>
       </div>
       <div class="col-md-3 ml-auto mr-0 p-0 d-flex flex-row">
-        <form action="{{ url_for('challenge.join_challenge') }}" method="POST">
+        <form class="d-flex flex-row h-50 mt-auto mb-auto" action="{{ url_for('challenge.join_challenge') }}" method="POST">
           <input type="hidden" name="challenge-id" value="{{ new_challenge.id }}">
           <button type="submit" id="join-challenge" class="img-btn small"><img src="{{ url_for('static', filename='assets/orange_add_plus.png') }}" alt="plus shaped button"></button>
         </form>

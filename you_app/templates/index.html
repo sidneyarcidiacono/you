@@ -49,8 +49,13 @@
           <div class="card mb-3 w-75 ml-auto mr-auto">
             <div class="card-header text-left">
               <div class="row w-100 align-items-center">
-                <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3">
-                <h5 class="mr-3">@{{ post.user.username }}</h5>
+                {% if post.user %}
+                  <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3">
+                  <h5 class="mr-3">@{{ post.user.username }}</h5>
+                {% else %}
+                  <img src="{{ url_for('static', filename='assets/' + post.image) }}" alt="{{ post.title }}" class="post-profile-pic mr-3">
+                  <h5 class="mr-3">{{ post.title }}</h5>
+                {% endif %}
                 <h7 class="card-subtitle text-muted">Fake location tag</h7>
               </div>
             </div>
