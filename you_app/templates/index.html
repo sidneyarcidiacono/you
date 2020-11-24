@@ -10,13 +10,16 @@
   <div class="row w-100 m-0 justify-content-between">
     <div class="col-md-9 mr-auto ml-auto mt-4 mb-4 text-center">
       <h2>Welcome to You</h2>
+      {% if current_user.is_anonymous %}
+        <h5 class="log-in-msg">Log in or sign up to make the most of You</h5>
 
+    {% else %}
       <!-- BACKDROP, DARKENS PAGE W/ MODAL OPEN -->
       <div class="backdrop" id="post-add-backdrop"></div>
 
       <!-- BUTTON TO OPEN MODAL -->
       <button type="button" class="img-btn small" id="open-add-post"><img id="add-post-btn" src="{{ url_for('static', filename='assets/unchecked_add_button.png') }}" alt="plus shaped button to add post"></button>
-
+      {% endif %}
       <!-- ADD POST MODAL -->
       <div class="modal" id="add-post-modal">
         <div class="modal-dialog" role="document">

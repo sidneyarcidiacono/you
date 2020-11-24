@@ -53,6 +53,17 @@
   padding: 0;
 }
 
+.log-in-msg {
+  background-color: #929698;
+  margin-top: 20px;
+  margin-bottom: 500px;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+}
+
 #settings-dropdown {
   max-width: 45px;
   max-height: 45px;
