@@ -2,6 +2,7 @@
 from you_app import db, login_manager
 from flask_login import UserMixin
 from passlib.hash import sha256_crypt
+from sqlalchemy.orm import backref
 
 
 @login_manager.user_loader
@@ -23,16 +24,21 @@ class Challenges(db.Model):
     dates = db.Column(db.String(50), nullable=False)
     completed = db.Column(db.Boolean, default=False)
     image = db.Column(db.String(30), nullable=True)
+    users = db.relationship("User", secondary="user_challenge_link")
 
 
-class Post(db.Model):
-    """Create class Post for user posts."""
+class UserChallengeLink(db.Model):
+    """Joining table for product and cart."""
 
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.String(30), nullable=True)
-    content = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    likes = db.Column(db.Integer, default=0)
+    challenge_id = db.Column(db.Integer, db.ForeignKey("challenges.id"))
+    user = db.relationship(
+        "User", backref=backref("link", cascade="all, delete-orphan")
+    )
+    challenge = db.relationship(
+        "Challenges", backref=backref("link", cascade="all, delete-orphan")
+    )
 
 
 class User(db.Model, UserMixin):
@@ -51,6 +57,9 @@ class User(db.Model, UserMixin):
         nullable=False,
         default="default_profile_pic.jpg",
     )
+    challenges = db.relationship(
+        "Challenges", secondary="user_challenge_link"
+    )
 
     def set_is_admin(self):
         """Set is_admin to True under a specific condition."""
@@ -64,3 +73,13 @@ class User(db.Model, UserMixin):
     def verify_password(self, password):
         """Verify hashed password for log in."""
         return sha256_crypt.verify(password, self.password)
+
+
+class Post(db.Model):
+    """Create class Post for user posts."""
+
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.String(30), nullable=True)
+    content = db.Column(db.String(200), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    likes = db.Column(db.Integer, default=0)

@@ -1,5 +1,6 @@
 """Module & package import."""
 from flask import Blueprint, render_template, redirect, url_for, request
+from flask_login import current_user, login_required
 from you_app import db
 from you_app.models import Challenges
 from you_app.main.utils import save_image
@@ -17,7 +18,7 @@ def challenges():
         new_challenge = Challenges(title=title, dates=dates, image=image_file)
         db.session.add(new_challenge)
         db.session.commit()
-        return redirect(url_for("main.challenges"))
+        return redirect(url_for("challenge.challenges"))
     new_challenges = Challenges.query.filter_by(completed=False).all()
     completed_challenges = Challenges.query.filter_by(completed=True).all()
 
@@ -26,3 +27,16 @@ def challenges():
         "completed_challenges": completed_challenges,
     }
     return render_template("challenges.html", **context)
+
+
+@challenge.route("/join-challenge", methods=["POST"])
+@login_required
+def join_challenge():
+    """Add challenge to user's challenges."""
+    challenge_id = request.form.get("challenge-id")
+    challenge = Challenges.query.filter_by(id=challenge_id).first()
+    if challenge.users:
+        challenge.users.append(current_user)
+        db.session.commit()
+    challenge.users = [current_user]
+    return redirect(url_for("challenge.challenges"))
