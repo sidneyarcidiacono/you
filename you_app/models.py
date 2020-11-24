@@ -81,6 +81,7 @@ class Goal(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(40), nullable=False)
+    goal = db.Column(db.Integer, nullable=False, default=0)
     start_date = db.Column(db.DateTime, default=datetime.now)
     end_date = db.Column(db.DateTime, default=datetime.now)
     percent_complete = db.Column(db.Integer, default=0)
