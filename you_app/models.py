@@ -3,6 +3,7 @@ from you_app import db, login_manager
 from flask_login import UserMixin
 from passlib.hash import sha256_crypt
 from datetime import datetime
+import math
 
 
 @login_manager.user_loader
@@ -87,4 +88,24 @@ class Goal(db.Model):
     user_baseline = db.Column(db.Integer, default=0, nullable=False)
     percent_complete = db.Column(db.Integer, default=0)
     percentile_friends = db.Column(db.Integer, default=0)
+    daily_expected_improvement = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    def daily_expected(self):
+        """Calculate daily expected intake/activity for user's goals."""
+        # Define helper variables for calculations
+        days_to_accomplish = (self.end_date - self.start_date).days
+        improvement_needed = self.goal - self.user_baseline
+        # If the goal is to decrease something (calorie intake, heart rate)
+        # Then we need the subtraction to go the opposite way. Check for that
+        # and reset our variable accordingly
+        if improvement_needed < 0:
+            print(f"Negative improvement needed: {improvement_needed}")
+            improvement_needed = self.user_baseline - self.goal
+        self.daily_expected_improvement = math.ceil(
+            improvement_needed / days_to_accomplish
+        )
+        # This is going to return an integer. This is going to be the
+        # hard number of steps towards our goal needed per day.
+        # We can evaluate this based on the category that we know.
+        return self.daily_expected_improvement
