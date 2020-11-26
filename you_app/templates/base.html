@@ -39,12 +39,12 @@
           <div class="dropdown-menu">
             {% if current_user.is_authenticated %}
             <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Check In</a>
+            <button class="dropdown-item" id="open-checkin-modal">Check In</button>
             <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{ url_for('user.logout') }}">Log Out</a>
+            <a class="dropdown-item" href="{{ url_for('user.logout') }}">Log Out</a>
             {% else %}
-              <a class="dropdown-item" href="{{ url_for('user.login') }}">Log In</a>
-              <a class="dropdown-item" href="{{ url_for('user.register') }}">Sign Up</a>
+            <a class="dropdown-item" href="{{ url_for('user.login') }}">Log In</a>
+            <a class="dropdown-item" href="{{ url_for('user.register') }}">Sign Up</a>
             {% endif %}
           </div>
         </li>
@@ -59,7 +59,6 @@
         {% endif %}
       </div>
     </nav>
-    </nav>
     <!-- INITIALIZE FLASH MESSAGES -->
     <div class="row text-center w-100">
       <div class="col-md-6 ml-auto mr-auto mt-2">
@@ -73,6 +72,45 @@
       </div>
     </div>
   </header>
+  <div class="row w-100 justify-content-center">
+    <div class="modal" id="checkin-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Check In</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" id="x-checkin-btn">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('check_in.add_check_in')}}" method="POST" id="check-in-form">
+              <div class="row w-100 justify-content-center">
+                <div class="col-md-6">
+                  <label for="checkin-category">What goal is this for?</label>
+                  <select class="form-control" name="checkin-category" id="checkin-cat-select" form="check-in-form">
+                    <option value="pick-one">Select One</option>
+                    <option value="Water Intake">Water Intake</option>
+                    <option value="Steps">Steps</option>
+                    <option value="Heart Rate">Resting Heart Rate</option>
+                    <option value="Calories">Calories</option>
+                    <option value="Weight">Weight</option>
+                  </select>
+                  <div class="invisible" id="checkin-form-part-two">
+                    <label for="input" id="input-label">Placeholder</label>
+                    <input class="form-control" type="number" name="goal" id="goal">
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="save-checkin">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-checkin">Close</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   {% block content %}{% endblock %}
   <!-- FOOTER -->
   <footer class="page-footer font-small">
