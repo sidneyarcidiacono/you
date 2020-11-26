@@ -5,7 +5,7 @@ const atAGlance = document.getElementById('at-a-glance')
 // Global variables for check in modal
 const openCheckIn = document.getElementById('open-checkin-modal')
 const checkInModal = document.getElementById('checkin-modal')
-const category = document.getElementById('checkin-cat-select')
+const checkIncheckInCategory = document.getElementById('checkin-cat-select')
 const xButton = document.getElementById('x-checkin-btn')
 const closeCheckInBtn = document.getElementById('close-checkin')
 const saveCheckInBtn = document.getElementById('save-checkin')
@@ -29,15 +29,15 @@ const checkInHandler = () => {
   console.log('clicked')
   const inputLabel = document.getElementById('input-label')
   const hiddenForm = document.getElementById('checkin-form-part-two')
-  if (category.value == "Water Intake") {
+  if (checkInCategory.value == "Water Intake") {
     inputLabel.innerHTML = "How many oz did you drink today?"
-  } else if (category.value == "Steps") {
+  } else if (checkInCategory.value == "Steps") {
     inputLabel.innerHTML = "How many steps did you take today?"
-  } else if (category.value == "Heart Rate") {
+  } else if (checkInCategory.value == "Heart Rate") {
     inputLabel.innerHTML = "What is your current resting heart rate?"
-  } else if (category.value == "Calories") {
+  } else if (checkInCategory.value == "Calories") {
     inputLabel.innerHTML = "How many calories have you had today?"
-  } else if (category.value == "Weight") {
+  } else if (checkInCategory.value == "Weight") {
     inputLabel.innerHTML = "What is your goal weight in pounds?"
   }
   hiddenForm.classList.remove('invisible')
@@ -56,4 +56,4 @@ openCheckIn.addEventListener('click', openCheckInHandler)
 closeCheckInBtn.addEventListener('click', closeCheckInModal)
 xButton.addEventListener('click', closeCheckInModal)
 saveCheckInBtn.addEventListener('click', saveCheckIn)
-category.addEventListener('change', checkInHandler)
+checkIncheckInCategory.addEventListener('change', checkInHandler)

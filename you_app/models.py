@@ -2,7 +2,7 @@
 from you_app import db, login_manager
 from flask_login import UserMixin
 from passlib.hash import sha256_crypt
-from datetime import datetime
+from datetime import date, datetime
 import math
 
 
@@ -77,6 +77,16 @@ class Post(db.Model):
     likes = db.Column(db.Integer, default=0)
 
 
+class Checkin(db.Model):
+    """Model to hold check in data."""
+
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(30), nullable=False)
+    amt_completed = db.Column(db.Integer, nullable=False)
+    date_entered = db.Column(db.DateTime, default=date.today())
+    goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"))
+
+
 class Goal(db.Model):
     """Model for user goals."""
 
@@ -86,6 +96,7 @@ class Goal(db.Model):
     start_date = db.Column(db.DateTime, default=datetime.now)
     end_date = db.Column(db.DateTime, default=datetime.now)
     user_baseline = db.Column(db.Integer, default=0, nullable=False)
+    daily_goal_percent = db.Column(db.Integer, default=0)
     percent_complete = db.Column(db.Integer, default=0)
     percentile_friends = db.Column(db.Integer, default=0)
     daily_expected_improvement = db.Column(db.Integer, default=0)
@@ -109,3 +120,11 @@ class Goal(db.Model):
         # hard number of steps towards our goal needed per day.
         # We can evaluate this based on the category that we know.
         return self.daily_expected_improvement
+
+    def set_percent_completed(self, check_in_amt):
+        """Define percent progress."""
+        pass
+
+    def set_daily_percent_completed(self, check_in_amt):
+        """Calculate percent complete towards daily goal."""
+        pass
