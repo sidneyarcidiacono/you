@@ -35,19 +35,19 @@ const finishAddGoalHandler = () => {
   const goalLabel = document.getElementById('goal-label')
   const baselineLabel = document.getElementById('baseline-label')
   const hiddenForm = document.getElementById('goal-form-part-two')
-  if (category.value == "water-intake") {
+  if (category.value == "Water Intake") {
     goalLabel.innerHTML = "How many oz per day?"
     baselineLabel.innerHTML = "How many oz per day do you drink right now?"
-  } else if (category.value == "steps") {
+  } else if (category.value == "Steps") {
     goalLabel.innerHTML = "How many steps per day?"
     baselineLabel.innerHTML = "How many steps per day do you take right now?"
-  } else if (category.value == "heart-rate") {
+  } else if (category.value == "Heart Rate") {
     goalLabel.innerHTML = "What would you like your heart rate to be at rest? (Beats per minute)"
     baselineLabel.innerHTML = "About what is your current resting heart rate?"
-  } else if (category.value == "calories") {
+  } else if (category.value == "Calories") {
     goalLabel.innerHTML = "How many calories per day?"
     baselineLabel.innerHTML = "About how many calories a day do you eat currently?"
-  } else if (category.value == "weight") {
+  } else if (category.value == "Weight") {
     goalLabel.innerHTML = "What is your goal weight in pounds?"
     baselineLabel.innerHTML = "What is your current weight in pounds?"
   }

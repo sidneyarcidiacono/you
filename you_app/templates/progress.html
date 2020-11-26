@@ -4,6 +4,21 @@
 
 <div class="row w-100 justify-content-center m-4">
   <h2>Your Progress</h2>
+  {% for goal in goals %}
+  <div class="row w-100 justify-content-center">
+    <div class="col-md-9">
+      <h4>{{ goal.category }}</h4>
+      {% if not goal.percent_complete == 100 %}
+        <p>You're {{ goal.percent_complete }}% there! You can do this!</p>
+      {% else %}
+        <p>You did it! Make sure to keep up your progress each day!</p>
+      {% endif %}
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{ goal.percent_complete }}%;"></div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

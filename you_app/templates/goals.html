@@ -34,11 +34,11 @@
                   <label for="goal-category">Category</label>
                   <select class="form-control" name="category" id="category-select" form="add-goal-form">
                     <option value="pick-one">Select One</option>
-                    <option value="water-intake">Water Intake</option>
-                    <option value="steps">Steps</option>
-                    <option value="heart-rate">Resting Heart Rate</option>
-                    <option value="calories">Calories</option>
-                    <option value="weight">Weight</option>
+                    <option value="Water Intake">Water Intake</option>
+                    <option value="Steps">Steps</option>
+                    <option value="Heart Rate">Resting Heart Rate</option>
+                    <option value="Calories">Calories</option>
+                    <option value="Weight">Weight</option>
                   </select>
                   <div class="invisible" id="goal-form-part-two">
                     <label for="goal" id="goal-label">Placeholder</label>
@@ -68,25 +68,17 @@
   <div class="row w-100">
     <div class="col-md-4 ml-auto mr-auto mb-4">
       <div class="card text-white bg-secondary mb-3">
-        {% if goal.category == "water-intake" %}
-        <div class="card-header">Water Intake</div>
+        <div class="card-header">{{ goal.category }}</div>
         <div class="card-body">
+        {% if goal.category == "Water Intake" %}
           <h4 class="card-title">{{ goal.goal }} oz per day</h4>
-        {% elif goal.category == "steps" %}
-        <div class="card-header">Steps</div>
-        <div class="card-body">
+        {% elif goal.category == "Steps" %}
           <h4 class="card-title">{{ goal.goal }} steps per day</h4>
-        {% elif goal.category == "heart-rate" %}
-        <div class="card-header">Resting Heart Rate</div>
-        <div class="card-body">
+        {% elif goal.category == "Heart Rate" %}
           <h4 class="card-title">{{ goal.goal }} beats per minute</h4>
-        {% elif goal.category == "calories" %}
-        <div class="card-header">Calories</div>
-        <div class="card-body">
+        {% elif goal.category == "Calories" %}
           <h4 class="card-title">{{ goal.goal }} calories per day</h4>
-        {% elif goal.category == "weight" %}
-        <div class="card-header">Weight</div>
-        <div class="card-body">
+        {% elif goal.category == "Weight" %}
           <h4 class="card-title">{{ goal.goal }} lbs</h4>
         {% endif %}
           <p class="card-text">You started working towards this goal on: {{ goal.start_date.strftime('%b %d, %Y') }}</p>
