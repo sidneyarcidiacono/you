@@ -18,6 +18,9 @@ def add_check_in():
     for_goal = Goal.query.filter_by(
         user_id=current_user.id, category=category
     ).first()
+    print(for_goal.set_daily_percent_completed(amt_completed))
+    print(f"Expected daily improvement {for_goal.daily_expected_improvement}")
+    print(f"Baseline: {for_goal.user_baseline}")
     check_in = Checkin(
         category=category, amt_completed=amt_completed, goal_id=for_goal.id
     )

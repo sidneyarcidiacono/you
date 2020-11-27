@@ -5,7 +5,7 @@ const atAGlance = document.getElementById('at-a-glance')
 // Global variables for check in modal
 const openCheckIn = document.getElementById('open-checkin-modal')
 const checkInModal = document.getElementById('checkin-modal')
-const checkIncheckInCategory = document.getElementById('checkin-cat-select')
+const checkInCategory = document.getElementById('checkin-cat-select')
 const xButton = document.getElementById('x-checkin-btn')
 const closeCheckInBtn = document.getElementById('close-checkin')
 const saveCheckInBtn = document.getElementById('save-checkin')
@@ -26,7 +26,6 @@ const closeCheckInModal = () => {
 
 // Event handler functions for check in modal inner events
 const checkInHandler = () => {
-  console.log('clicked')
   const inputLabel = document.getElementById('input-label')
   const hiddenForm = document.getElementById('checkin-form-part-two')
   if (checkInCategory.value == "Water Intake") {
@@ -56,4 +55,4 @@ openCheckIn.addEventListener('click', openCheckInHandler)
 closeCheckInBtn.addEventListener('click', closeCheckInModal)
 xButton.addEventListener('click', closeCheckInModal)
 saveCheckInBtn.addEventListener('click', saveCheckIn)
-checkIncheckInCategory.addEventListener('change', checkInHandler)
+checkInCategory.addEventListener('change', checkInHandler)

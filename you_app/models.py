@@ -128,7 +128,7 @@ class Goal(db.Model):
     def set_daily_percent_completed(self, check_in_amt):
         """Calculate percent complete towards daily goal."""
         self.daily_goal_percent = math.ceil(
-            check_in_amt
+            int(check_in_amt)
             / (self.daily_expected_improvement + self.user_baseline)
             * 100
         )

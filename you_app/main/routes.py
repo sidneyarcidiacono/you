@@ -1,7 +1,7 @@
 """Import modules & packages."""
 from flask import render_template, Blueprint
 from flask_login import current_user
-from you_app.models import Post
+from you_app.models import Post, Goal
 
 main = Blueprint("main", __name__)
 
@@ -13,6 +13,7 @@ def homepage():
         posts = Post.query.all()
         user_challenges = current_user.challenges
         news_feed = posts + user_challenges
-        return render_template("index.html", news_feed=news_feed)
+        goals = Goal.query.filter_by(user_id=current_user.id)
+        return render_template("index.html", news_feed=news_feed, goals=goals)
     else:
         return render_template("index.html")
