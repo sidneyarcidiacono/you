@@ -100,6 +100,8 @@ class Goal(db.Model):
     percent_complete = db.Column(db.Integer, default=0)
     percentile_friends = db.Column(db.Integer, default=0)
     daily_expected_improvement = db.Column(db.Integer, default=0)
+    set_daily_expected = db.Column(db.DateTime, default=date.today())
+    daily_expected_intake = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
     def daily_expected(self):
@@ -121,15 +123,31 @@ class Goal(db.Model):
         # We can evaluate this based on the category that we know.
         return self.daily_expected_improvement
 
+    def set_daily_expected_intake(self):
+        """Set each day's intake/activity goal."""
+        if not self.daily_expected_intake:
+            self.daily_expected_intake = (
+                self.user_baseline + self.daily_expected_improvement
+            )
+        elif (
+            datetime.strptime(str(date.today()), "%Y-%m-%d")
+            - self.set_daily_expected
+        ).days > 1 and self.daily_expected_intake:
+            self.daily_expected_intake += self.daily_expected_improvement
+        return self.daily_expected_intake
+
     def set_percent_completed(self, check_in_amt):
         """Define percent progress."""
         pass
 
     def set_daily_percent_completed(self, check_in_amt):
         """Calculate percent complete towards daily goal."""
-        self.daily_goal_percent = math.ceil(
-            int(check_in_amt)
-            / (self.daily_expected_improvement + self.user_baseline)
-            * 100
-        )
+        if not self.daily_goal_percent:
+            self.daily_goal_percent = math.floor(
+                (int(check_in_amt) / self.daily_expected_intake * 100)
+            )
+        else:
+            self.daily_goal_percent += math.floor(
+                (int(check_in_amt) / self.daily_expected_intake * 100)
+            )
         return self.daily_goal_percent
