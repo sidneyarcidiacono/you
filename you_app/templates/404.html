@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-6 ml-auto mr-auto mt-4 text-center">
+    <h1 class="mb-3">Oops!</h1>
+    <h4 class="mt-2 mb-3">What you're looking for must not exist anymore. Let's get you back!</h4>
+    <button type="button" class="btn btn-primary" onclick="window.location.href = {{ url_for('main.homepage') }}">Return to Home</button>
+  </div>
+</div>
+
+{% endblock %}
