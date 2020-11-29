@@ -4394,6 +4394,8 @@ input[type="button"].btn-block {
   flex-grow: 1;
   -ms-flex-align: center;
   align-items: center;
+  background-color: #78c2ad;
+  z-index: 500;
 }
 
 .navbar-toggler {
