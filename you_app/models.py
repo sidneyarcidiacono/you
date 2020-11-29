@@ -71,7 +71,7 @@ class Post(db.Model):
     """Create class Post for user posts."""
 
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.String(30), nullable=True)
+    image = db.Column(db.String(30), nullable=True, default=None)
     content = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     likes = db.Column(db.Integer, default=0)

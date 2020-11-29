@@ -31,11 +31,13 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="{{ url_for('post.add_post') }}" method="POST">
+              <form action="{{ url_for('post.add_post') }}" method="POST" enctype="multipart/form-data">
                 <div class="row w-100 justify-content-center">
                   <div class="col-md-9">
                     <label for="status">Keep us motivated...</label>
-                    <input class="form-control" type="textarea" name="status" id="status">
+                    <textarea class="form-control" type="text" name="status" id="status"></textarea>
+                    <label for="image">Add Image</label>
+                    <input class="form-control" type="file" name="image" id="image">
                   </div>
                 </div>
             </div>
