@@ -70,25 +70,7 @@
             </div>
           </div>
         {% endfor %}
-        <!-- AT A GLANCE CARD -->
-      </div>
-      <div class="col-md-3 p-0 invisible" id="at-a-glance">
-        <div class="card mb-3">
-          <h3 class="card-header">You, at a glance</h3>
-          <div class="card-body">
-            {% for goal in goals %}
-            <h5 class="card-title">{{ goal.category }}</h5>
-            <h6 class="card-subtitle text-muted">{{ goal.daily_goal_percent }}% to daily goal</h6>
-            {% endfor %}
-          </div>
-          <div class="card-body">
-            <a href="{{ url_for('progress.progress_page') }}" class="card-link">See Progress</a>
-            <a href="{{ url_for('goal.goals') }}" class="card-link">Check your goals</a>
-          </div>
-          <div class="card-footer text-muted">
-            Last updated: 1 hr ago
-          </div>
-        </div>
+
       </div>
     </div>
   </div>

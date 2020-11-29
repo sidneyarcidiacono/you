@@ -148,6 +148,8 @@ class Goal(db.Model):
             )
         return self.daily_goal_percent
 
+    # TODO: Improve this function to more accurately calculate percentage
+
     def set_percent_completed(self):
         """Define percent progress."""
         # Define variable days to calculate days since goal was started
