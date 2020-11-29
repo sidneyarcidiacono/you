@@ -169,6 +169,9 @@ class Goal(db.Model):
         if all_check_ins:
             for check_in in all_check_ins:
                 # for each check in, sum the amount
+                print(
+                    f"Check in {check_in.id} amount {check_in.amt_completed}"
+                )
                 result += check_in.amt_completed
                 # Increment the counter for each check in
                 counter += 1

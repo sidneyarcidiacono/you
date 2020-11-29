@@ -46,7 +46,6 @@ def add_goal():
         user_baseline=baseline,
         user_id=current_user.id,
     )
-    print(f"{new_goal.category}, {new_goal.goal}")
     db.session.add(new_goal)
     db.session.commit()
     flash(

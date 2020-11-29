@@ -4333,6 +4333,7 @@ input[type="button"].btn-block {
   justify-content: space-between;
   padding: 0.5rem 1rem;
   height: var(--nav-height);
+  z-index: 1;
 }
 
 .navbar .container,
