@@ -12,8 +12,5 @@ def progress_page():
     """Show user current progress in challenges."""
     goals = Goal.query.filter_by(user_id=current_user.id).all()
     for goal in goals:
-        print(f"Function call: {goal.set_percent_completed()}")
+        goal.set_percent_completed()
     return render_template("progress.html", goals=goals)
-
-
-# TODO: write routes to pass progress info to front end for rendering graphs
