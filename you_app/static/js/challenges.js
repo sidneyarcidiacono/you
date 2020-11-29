@@ -21,6 +21,7 @@ const cancelAddHandler = () => {
 }
 
 const saveChallengeHandler = () => {
+  console.log('clicked')
   addChallengeModal.style.display = 'none'
   backdropHandler()
 }
