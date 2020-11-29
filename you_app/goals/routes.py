@@ -23,8 +23,8 @@ def goals():
     """Show user visual representations of their goals."""
     goals = Goal.query.filter_by(user_id=current_user.id).all()
     for goal in goals:
-        print(f"Funct call 1: {goal.daily_expected()}")
-        print(f"Funct call 2: {goal.set_daily_expected_intake()}")
+        goal.daily_expected()
+        goal.set_daily_expected_intake()
         db.session.commit()
     return render_template("goals.html", goals=goals)
 

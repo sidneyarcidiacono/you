@@ -10,7 +10,9 @@ progress = Blueprint("progress", __name__)
 @login_required
 def progress_page():
     """Show user current progress in challenges."""
-    goals = Goal.query.filter_by(user_id=current_user.id)
+    goals = Goal.query.filter_by(user_id=current_user.id).all()
+    for goal in goals:
+        print(f"Function call: {goal.set_percent_completed()}")
     return render_template("progress.html", goals=goals)
 
 

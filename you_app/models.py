@@ -136,10 +136,6 @@ class Goal(db.Model):
             self.daily_expected_intake += self.daily_expected_improvement
         return self.daily_expected_intake
 
-    def set_percent_completed(self, check_in_amt):
-        """Define percent progress."""
-        pass
-
     def set_daily_percent_completed(self, check_in_amt):
         """Calculate percent complete towards daily goal."""
         if not self.daily_goal_percent:
@@ -151,3 +147,42 @@ class Goal(db.Model):
                 (int(check_in_amt) / self.daily_expected_intake * 100)
             )
         return self.daily_goal_percent
+
+    def set_percent_completed(self):
+        """Define percent progress."""
+        # Define variable days to calculate days since goal was started
+        days = (
+            datetime.strptime(str(date.today()), "%Y-%m-%d") - self.start_date
+        ).days
+        # If we just started, days is just going to be 1
+        if days < 1:
+            days = 1
+
+        # Query check ins so we know where the user is at in terms of progress
+        all_check_ins = Checkin.query.filter_by(goal_id=self.id).all()
+        # Set helper variables
+        counter = 0
+        result = 0
+        # Check if there are check ins to look at
+        if all_check_ins:
+            for check_in in all_check_ins:
+                # for each check in, sum the amount
+                result += check_in.amt_completed
+                # Increment the counter for each check in
+                counter += 1
+            # If our result is high for categories like calories or steps,
+            # we need to normalize the data so that the percentages are stable
+            # So, we'll divide these by 100
+            if result > 1000:
+                daily_average = math.floor((result / counter) / 100)
+            else:
+                # If the result is pretty normal (for all other categories)
+                # we just want the average
+                daily_average = math.floor(result / counter)
+            # Set self.percent_complete
+            self.percent_complete = math.floor((daily_average / days))
+            return self.percent_complete
+        # If there are no check ins, our default percent complete is 0, so
+        # we just return that
+        else:
+            return self.percent_complete
