@@ -24,6 +24,7 @@
 
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
+          {% if current_user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('challenge.challenges') }}">Challenges</a>
           </li>
@@ -33,6 +34,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('progress.progress_page') }}">Progress</a>
           </li>
+          {% endif %}
         </ul>
         <!-- SETTINGS DROPDOWN -->
         <li class="nav-item dropdown">
