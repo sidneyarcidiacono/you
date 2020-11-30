@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>You</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
-  <script type="text/javascript" src="{{ url_for('static', filename='js/main.js')}}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+  <script type="text/javascript"src="{{ url_for('static', filename='js/checkin.js') }}" defer></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous" defer></script>
   {% block head %}{% endblock %}
@@ -35,14 +36,14 @@
         </ul>
         <!-- SETTINGS DROPDOWN -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ url_for('static', filename='assets/settings.png') }}" alt="Gear icon" id="settings-dropdown"></a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% if current_user.is_authenticated %}<img src="{{ url_for('static', filename='assets/settings.png') }}" alt="Gear icon" id="settings-dropdown"></a>
           <div class="dropdown-menu">
-            {% if current_user.is_authenticated %}
             <a class="dropdown-item" href="#">Settings</a>
             <button class="dropdown-item" id="open-checkin-modal">Check In</button>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ url_for('user.logout') }}">Log Out</a>
-            {% else %}
+          {% else %}<button type="button" class="btn btn-primary" id="settings-dropdown">Get Started!</button></a>
+          <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ url_for('user.login') }}">Log In</a>
             <a class="dropdown-item" href="{{ url_for('user.register') }}">Sign Up</a>
             {% endif %}
