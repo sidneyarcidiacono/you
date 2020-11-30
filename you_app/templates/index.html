@@ -5,15 +5,45 @@
 {% endblock %}
 
 {% block content %}
+{% if current_user.is_anonymous %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
+    <h1 class="log-in-msg mb-4">Welcome to You</h1>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href={{ url_for('user.register') }}">Join Your Community</button>
+  </div>
+</div>
+<div class="row w-100 justify-content-between">
+  <div class="col-md-7 m-0">
+    <img src="{{ url_for('static', filename='assets/running_landing_page.jpg') }}" alt="Man running down a tree lined street" class="landing-page-img">
+  </div>
+  <div class="col-md-4 m-0 div-secondary">
+    <h3 class="mr-3 txt-white">Revolutionizing...</h3>
+    <h5 class="mt-3 text-center txt-white">The way we become our best selves</h5>
+    <p class="text-right mt-5">Bringing you a fitness community like no other. Find your best self here.</p>
+    <div class="row justify-content-center">
+      <button type="button" class="btn btn-primary mt-4" onclick="window.location.href={{ url_for('user.register') }}">Join Us</button>
+    </div>
+  </div>
+  <div class="row w-100 justify-content-between">
+    <div class="col-md-4 m-0 div-secondary">
+      <h3 class="mr-3 txt-white">Revolutionizing...</h3>
+      <h5 class="mt-3 text-center txt-white">The way we become our best selves</h5>
+      <p class="text-right mt-5">Bringing you a fitness community like no other. Find your best self here.</p>
+      <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary mt-4" onclick="window.location.href={{ url_for('user.register') }}">Join Us</button>
+      </div>
+    </div>
+    <div class="col-md-7 justify-content-right">
+      <img src="{{ url_for('static', filename='assets/landing_page_swim_ocean.jpg') }}" alt="Man paddling into a wave on a surfboard" class="landing-page-img">
+    </div>
+</div>
 
+{% else %}
 <div class="container-fluid p-0">
   <div class="row w-100 m-0 justify-content-between">
     <div class="col-md-9 mr-auto ml-auto mt-4 mb-4 text-center">
       <h2>Welcome to You</h2>
-      {% if current_user.is_anonymous %}
-        <h5 class="log-in-msg">Log in or sign up to make the most of You</h5>
 
-    {% else %}
       <!-- BACKDROP, DARKENS PAGE W/ MODAL OPEN -->
       <div class="backdrop" id="post-add-backdrop"></div>
 
@@ -51,31 +81,31 @@
       </div>
       <!-- POST CARDS -->
       {% for post in news_feed %}
-          <div class="card mb-3 w-75 ml-auto mr-auto">
-            <div class="card-header text-left">
-              <div class="row w-100 align-items-center">
-                {% if post.user %}
-                  <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3">
-                  <h5 class="mr-3">@{{ post.user.username }}</h5>
-                {% else %}
-                  <img src="{{ url_for('static', filename='assets/' + post.image) }}" alt="{{ post.title }}" class="post-profile-pic mr-3">
-                  <h5 class="mr-3">{{ post.title }}</h5>
-                {% endif %}
-                <h7 class="card-subtitle text-muted">Fake location tag</h7>
-              </div>
-            </div>
-            {% if post.image %}
-              <img src="{{ url_for('static', filename='assets/' + post.image )}}" alt="{{ post.content }}">
+      <div class="card mb-3 w-75 ml-auto mr-auto">
+        <div class="card-header text-left">
+          <div class="row w-100 align-items-center">
+            {% if post.user %}
+            <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3">
+            <h5 class="mr-3">@{{ post.user.username }}</h5>
+            {% else %}
+            <img src="{{ url_for('static', filename='assets/' + post.image) }}" alt="{{ post.title }}" class="post-profile-pic mr-3">
+            <h5 class="mr-3">{{ post.title }}</h5>
             {% endif %}
-            <div class="card-body">
-              <p class="card-text">{{ post.content }}</p>
-            </div>
+            <h7 class="card-subtitle text-muted">Fake location tag</h7>
           </div>
-        {% endfor %}
-
+        </div>
+        {% if post.image %}
+        <img src="{{ url_for('static', filename='assets/' + post.image )}}" alt="{{ post.content }}">
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">{{ post.content }}</p>
+        </div>
       </div>
+      {% endfor %}
+
     </div>
   </div>
+</div>
 </div>
 
 
