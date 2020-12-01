@@ -51,14 +51,14 @@
             {% endif %}
           </div>
         </li>
+        {% if current_user.is_authenticated %}
         <!-- SEARCH BAR -->
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
         <!-- PROFILE IMAGE BUTTON IF LOGGED IN USER -->
-        {% if current_user.is_authenticated %}
-        <button type="button" id="open-glance" class="img-btn"><img src="{{ url_for('static', filename='assets/default_profile_pic.jpg')}}" alt="Woman in fitness gear outside" class="profile-pic"></button>
+        <button type="button" id="open-glance" class="img-btn"><img src="{{ url_for('static', filename='assets/default_profile_pic.jpg') }}" alt="Woman in fitness gear outside" class="profile-pic"></button>
         {% endif %}
       </div>
     </nav>
