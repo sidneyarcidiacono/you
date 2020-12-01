@@ -9,19 +9,28 @@ const checkInCategory = document.getElementById('checkin-cat-select')
 const xButton = document.getElementById('x-checkin-btn')
 const closeCheckInBtn = document.getElementById('close-checkin')
 const saveCheckInBtn = document.getElementById('save-checkin')
+const checkInModalBackdrop = document.getElementById('checkin-modal-backdrop')
+
+// Event handler to show backdrop
+const toggleBackdropHandler = () => {
+  checkInModalBackdrop.classList.toggle('visible')
+}
 
 // Event handler to open checkin modal
 const openCheckInHandler = () => {
   checkInModal.style.display = 'block'
+  toggleBackdropHandler()
 }
 
 // Event handler to close checkin modal
 const saveCheckIn = () => {
   checkInModal.style.display = 'none'
+  toggleBackdropHandler()
 }
 
 const closeCheckInModal = () => {
   checkInModal.style.display = 'none'
+  toggleBackdropHandler()
 }
 
 // Event handler functions for check in modal inner events
