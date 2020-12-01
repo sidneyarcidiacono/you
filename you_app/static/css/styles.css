@@ -16,32 +16,34 @@ header {
 
 .landing-page-img {
   border-radius: 15px;
-  max-height: 35vw;
-  max-width: auto;
+  max-height: auto;
+  width: 65vw;
+}
+
+.info-section {
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: lighter;
 }
 
 .div-secondary {
-  width: 50vw;
+  width: 100%;
   height: auto;
-  color: #fff;
   background-color: var(--secondary);
   border-radius: 15px;
-  padding: 25px;
-  margin: 0;
-  align-self: center;
 }
 
 .div-primary {
-  height: 40vw;
   width: 100%;
+  height: auto;
   background-color: var(--primary);
   border-radius: 15px;
-  margin: 0;
 }
 
 .txt-white {
   color: #fff;
-  text-shadow: 0 0 3px #CCD5D9
+  text-shadow: 0 0 3px #CCD5D9;
+  font-weight: lighter;
 }
 
 .backdrop {

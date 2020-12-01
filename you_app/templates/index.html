@@ -12,28 +12,30 @@
     <button type="button" class="btn btn-secondary" onclick="window.location.href={{ url_for('user.register') }}">Join Your Community</button>
   </div>
 </div>
-<div class="row w-100 justify-content-between">
-  <div class="col-md-7 m-0">
+<div class="row w-100 justify-content-between m-0">
+  <div class="col-md-7 m-0 p-0">
     <img src="{{ url_for('static', filename='assets/running_landing_page.jpg') }}" alt="Man running down a tree lined street" class="landing-page-img">
   </div>
-  <div class="col-md-4 m-0 div-secondary">
-    <h3 class="mr-3 txt-white">Revolutionizing...</h3>
+  <div class="col-md-4 m-0 div-secondary p-4 mr-3">
+    <h3 class="mr-3 pt-5 txt-white">Revolutionizing...</h3>
     <h5 class="mt-3 text-center txt-white">The way we become our best selves</h5>
-    <p class="text-right mt-5">Bringing you a fitness community like no other. Find your best self here.</p>
+    <p class="text-right mt-5 info-section">With tailored challenges, and an exclusive community dedicated to bringing out the best in its members, You is curating a fitness community like no other.</p>
+    <p class="text-center mt-5 info-section">Find your best self here. </p>
     <div class="row justify-content-center">
       <button type="button" class="btn btn-primary mt-4" onclick="window.location.href={{ url_for('user.register') }}">Join Us</button>
     </div>
   </div>
-  <div class="row w-100 justify-content-between">
-    <div class="col-md-4 m-0 div-secondary">
-      <h3 class="mr-3 txt-white">Revolutionizing...</h3>
-      <h5 class="mt-3 text-center txt-white">The way we become our best selves</h5>
-      <p class="text-right mt-5">Bringing you a fitness community like no other. Find your best self here.</p>
+  <div class="row w-100 m-0 mt-5 ml-3">
+    <div class="col-md-4 div-primary p-4">
+      <h3 class="mr-3 pt-5 txt-white">Striving...</h3>
+      <h5 class="mt-3 text-center txt-white">For a new era in personal fitness</h5>
+      <p class="text-right mt-5 info-section">With programs designed to fit you like a glove, we help you become and remain the best version of You through lasting progress and fundamentally creating positive habits.</p>
+      <p class="text-center mt-5 info-section">Here to help you accomplish YOUR goals.</p>
       <div class="row justify-content-center">
-        <button type="button" class="btn btn-primary mt-4" onclick="window.location.href={{ url_for('user.register') }}">Join Us</button>
+        <button type="button" class="btn btn-secondary mt-4" onclick="window.location.href={{ url_for('user.register') }}">Join Us</button>
       </div>
     </div>
-    <div class="col-md-7 justify-content-right">
+    <div class="col-md-8 p-0 text-right justify-content-right">
       <img src="{{ url_for('static', filename='assets/landing_page_swim_ocean.jpg') }}" alt="Man paddling into a wave on a surfboard" class="landing-page-img">
     </div>
 </div>
