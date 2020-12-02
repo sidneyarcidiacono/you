@@ -90,6 +90,13 @@ header {
   border-radius: 50%;
 }
 
+.settings-profile-img {
+  border-radius: 15px;
+  height: 100px;
+  margin-bottom: 15px;
+  width: 100px;
+}
+
 .img-btn {
   background-color: transparent;
   border: none;

@@ -4,8 +4,34 @@
 
 <div class="container-fluid w-100">
   <div class="row w-100 text-center justify-content-center">
-    <div class="col-md-9 justify-content-center mt-5">
+    <div class="col-md-9 justify-content-center mt-5 mb-5">
       <h2>Settings</h2>
+    </div>
+  </div>
+  <div class="row w-100 text-center justify-content-center">
+    <div class="col-md-6 text-center justify-content-center">
+      <form action="{{ url_for('user.settings') }}" method="POST" enctype="multipart/form-data">
+        <div class="row w-100 justify-content-center">
+          <div class="d-flex justify-content-center flex-column ml-auto mr-auto">
+            <label for="avatar">Profile Picture</label>
+            <img src="{{ url_for('static', filename='assets/' + current_user.avatar) }}" alt="{{ current_user.username }}" class="settings-profile-img">
+            <input type="file" name="avatar" value="{{ current_user.avatar }}">
+          </div>
+        </div>
+        <label class="mt-4" for="username">Username</label>
+        <input class="form-control" type="text" name="username" id="username" value="{{ current_user.username }}" placeholder="{{ current_user.username }}">
+        <small>Your username appears on all of your posts, and on challenges you host.</small></br>
+        <label class="mt-4" for="email">Email</label>
+        <input class="form-control" type="email" name="email" id="email" value="{{ current_user.email }}" placeholder="{{ current_user.email }}">
+        <small>Your email does not appear publicly.</small></br>
+        <label class="mt-4" for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password">
+        <small>Update your password.</small></br>
+        <label class="mt-4" for="confirm-password mb-3">Confirm New Password</label>
+        <input class="form-control" type="password" name="confirm-password" id="confirm-password">
+
+        <input class="btn btn-primary mt-5" type="submit" value="Update Settings">
+      </form>
     </div>
   </div>
 </div>
