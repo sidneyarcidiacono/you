@@ -6,7 +6,7 @@ from flask import (
     redirect,
     url_for,
 )
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from you_app import db
 from you_app.models import User
 
@@ -75,5 +75,32 @@ def settings():
     if request.method == "GET":
         return render_template("settings.html")
     elif request.method == "POST":
-        flash("Your account has been updated!")
+        new_username = request.form.get("username")
+        new_email = request.form.get("email")
+        new_password = request.form.get("password")
+        new_confirm_pass = request.form.get("confirm-password")
+
+        if (
+            User.query.filter_by(username=new_username).first()
+            and new_username is not current_user.username
+        ):
+            flash("Username taken. Please try again.")
+        elif (
+            User.query.filter_by(email=new_email).first()
+            and new_email != current_user.email
+        ):
+            flash("An account with that email already exists.")
+        elif (
+            new_confirm_pass
+            and new_password
+            and new_confirm_pass == new_password
+        ):
+            current_user.set_password()
+            db.session.commit()
+        else:
+            current_user.username = new_username
+            current_user.email = new_email
+            db.session.commit()
+            flash("Your account has been updated!")
+            return redirect(url_for("user.settings"))
         return redirect(url_for("user.settings"))
