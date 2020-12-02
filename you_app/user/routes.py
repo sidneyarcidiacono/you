@@ -82,7 +82,7 @@ def settings():
 
         if (
             User.query.filter_by(username=new_username).first()
-            and new_username is not current_user.username
+            and new_username != current_user.username
         ):
             flash("Username taken. Please try again.")
         elif (
@@ -95,8 +95,10 @@ def settings():
             and new_password
             and new_confirm_pass == new_password
         ):
-            current_user.set_password()
+            current_user.set_password(new_password)
             db.session.commit()
+            flash("Your password has been updated.")
+            return redirect(url_for("user.settings"))
         else:
             current_user.username = new_username
             current_user.email = new_email
