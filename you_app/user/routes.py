@@ -66,3 +66,14 @@ def logout():
     logout_user()
     flash("You have successfully logged out!")
     return redirect(url_for("main.homepage"))
+
+
+@user.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+    """Allow user to edit their personal settings."""
+    if request.method == "GET":
+        return render_template("settings.html")
+    elif request.method == "POST":
+        flash("Your account has been updated!")
+        return redirect(url_for("user.settings"))

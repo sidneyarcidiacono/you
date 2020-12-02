@@ -7,6 +7,21 @@ header {
   height: 55px;
 }
 
+.flash-messages {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  left: 50vh;
+  top: 40px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  text-align: center;
+  z-index: 100;
+}
+
 .jumbotron{
 	background-image: url("../assets/landing_page_main.jpg");
 	background-size: cover;
