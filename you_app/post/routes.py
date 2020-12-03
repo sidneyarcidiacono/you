@@ -19,3 +19,14 @@ def add_post():
     db.session.commit()
     flash("Successfully added post!")
     return redirect(url_for("main.homepage"))
+
+
+@post.route("/delete_post/<post_id>")
+@login_required
+def delete_post(post_id):
+    """Delete user post."""
+    post_to_delete = Post.query.filter_by(id=post_id).first()
+    db.session.delete(post_to_delete)
+    db.session.commit()
+    flash("This post has successfully been deleted.")
+    return redirect(url_for("main.homepage"))

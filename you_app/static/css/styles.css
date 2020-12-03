@@ -142,6 +142,16 @@ header {
           background-clip: text;
 }
 
+.post-menu {
+  width: 25px;
+  height: auto;
+  background-color: transparent:
+}
+
+.post-menu:hover {
+  width: 30px;
+}
+
 #settings-dropdown {
   max-height: 45px;
 }

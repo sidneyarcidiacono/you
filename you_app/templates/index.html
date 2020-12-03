@@ -49,16 +49,28 @@
       <!-- POST CARDS -->
       {% for post in news_feed %}
       <div class="card mb-3 w-75 ml-auto mr-auto">
-        <div class="card-header text-left">
-          <div class="row w-100 align-items-center">
+        <div class="card-header text-left m-0 pl-0 pr-0">
+          <div class="row w-100 justify-content-between m-0">
             {% if post.user %}
-            <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3">
-            <h5 class="mr-3">@{{ post.user.username }}</h5>
-            {% else %}
-            <img src="{{ url_for('static', filename='assets/' + post.image) }}" alt="{{ post.title }}" class="post-profile-pic mr-3">
-            <h5 class="mr-3">{{ post.title }}</h5>
-            {% endif %}
-            <h7 class="card-subtitle text-muted">Fake location tag</h7>
+            <div class="col-md-4">
+              <div class="row w-100 ml-3">
+                <img src="{{ url_for('static', filename='assets/' + post.user.avatar) }}" alt="user profile picture" class="post-profile-pic mr-3 mb-auto mt-auto">
+                <h5 class="mr-3 mt-auto mb-auto">@{{ post.user.username }}</h5>
+              </div>
+            </div>
+            {% if post.user == current_user %}
+            <div class="col-md-4 text-right p-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img class="post-menu" src="{{ url_for('static', filename='assets/ellipsis_menu.png')}}"></a>
+                <div class="dropdown-menu p-0">
+                  <button class="dropdown-item p-0" onclick="window.location.href = 'delete_post/{{ post.id }}'">Delete Post</button>
+                </div>
+            </div>
+              {% endif %}
+              {% else %}
+              <img src="{{ url_for('static', filename='assets/' + post.image) }}" alt="{{ post.title }}" class="post-profile-pic mr-3">
+              <h5 class="mr-3">{{ post.title }}</h5>
+              {% endif %}
           </div>
         </div>
         {% if post.image %}
