@@ -81,3 +81,14 @@ def edit_goal():
         db.session.commit()
         flash("Goal successfully updated!")
         return redirect(url_for("goal.edit_goal"))
+
+
+@goal.route("/delete_goal", methods=["POST"])
+def delete_goal():
+    """Delete goal from user goals."""
+    goal_id = request.form.get("del-goal-id")
+    goal_to_delete = Goal.query.filter_by(id=goal_id).first()
+    db.session.delete(goal_to_delete)
+    db.session.commit()
+    flash("Goal deleted!")
+    return redirect(url_for("goal.goals"))
