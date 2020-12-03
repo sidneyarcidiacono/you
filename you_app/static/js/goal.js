@@ -1,4 +1,4 @@
-// Global constants for opening and closing modal event listeners
+// Global constants for opening and closing add goal modal event listeners
 const backdrop = document.getElementById('modal-backdrop')
 const addGoalBtn = document.getElementById('start-modal-btn')
 const addGoalModal = document.getElementById('add-goal-modal')
@@ -6,11 +6,17 @@ const xModalButton = document.getElementById('x-goal-button')
 const saveGoalBtn = document.getElementById('save-add-goal')
 const closeModalBtn = document.getElementById('stop-add-goal')
 
-// Global constants for showing and hiding form portions
+// Global constants for showing and hiding add goal form portions
 const category = document.getElementById('category-select')
 
+// Global constants for showing edit goal modal
+const editGoalBtns = document.querySelectorAll('.open-edit-goal')
+const editGoalModal = document.getElementById('edit-goal-modal')
+const saveEditGoalBtn = document.getElementById('save-edit-goal')
+const xEditGoalBtn = document.getElementById('x-edit-button')
+const closeEditGoalBtn = document.getElementById('stop-edit-goal')
 
-// Handlers for open and close modal event listeners
+// Handlers for open and close add goal modal event listeners
 const backdropHandler = () => {
   backdrop.classList.toggle('visible')
 }
@@ -27,6 +33,56 @@ const cancelAddHandler = () => {
 
 const saveAddGoalHandler = () => {
   addGoalModal.style.display = 'none'
+  backdropHandler()
+}
+
+// TODO: fix the hell that is my HTML rn and make it work
+
+// Helper function to post goal data to back end
+const postGoalData = () => {
+  const goalId = document.getElementById('goal-id').value
+  console.log("in postgoaldata funct")
+  axios.post('/goal_data', {
+    "goalId": goalId
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+
+}
+
+// Helper function to dynamically get goal data
+const getGoalData = (event) => {
+  event.preventDefault()
+  console.log("making request")
+  axios.get('/goal_data')
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+
+// Handlers for open and close edit goal modal event listeners
+const editGoalModalHandler = () => {
+  backdropHandler()
+  editGoalModal.style.display = 'block'
+  getGoalData()
+}
+
+
+
+const cancelEditHandler = () => {
+  editGoalModal.style.display = 'none'
+  backdropHandler()
+}
+
+const saveEditGoalHandler = () => {
+  editGoalModal.style.display = 'none'
   backdropHandler()
 }
 
@@ -56,9 +112,17 @@ const finishAddGoalHandler = () => {
 
 category.addEventListener('change', finishAddGoalHandler)
 
-// Event listeners for opening and closing modal
+// Event listeners for opening and closing add goal modal
 addGoalBtn.addEventListener('click', addGoalModalHandler)
 saveGoalBtn.addEventListener('click', saveAddGoalHandler)
 xModalButton.addEventListener('click', cancelAddHandler)
 closeModalBtn.addEventListener('click', cancelAddHandler)
 backdrop.addEventListener('click', cancelAddHandler)
+
+// Event listeners for opening and closeing edit goal modal
+for (editGoalBtn of editGoalBtns) {
+  editGoalBtn.addEventListener('click', editGoalModalHandler)
+}
+saveEditGoalBtn.addEventListener('click', saveEditGoalHandler)
+closeEditGoalBtn.addEventListener('click', cancelEditHandler)
+xEditGoalBtn.addEventListener('click', cancelEditHandler)

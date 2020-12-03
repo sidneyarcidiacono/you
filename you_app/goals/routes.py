@@ -7,6 +7,7 @@ from flask import (
     redirect,
     url_for,
     flash,
+    jsonify,
 )
 from flask_login import login_required, current_user
 from you_app.models import Goal
@@ -52,3 +53,41 @@ def add_goal():
         "Great job! You've added a goal! You can add as many as you'd like."
     )
     return redirect(url_for("goal.goals"))
+
+
+@goal.route("/edit_goal", methods=["POST"])
+@login_required
+def edit_goal():
+    """Update user's goal."""
+    goal_to_update = request.form.get("goal_id")
+    flash("Goal successfully updated!")
+    return redirect(url_for("goal.goals"))
+
+
+@goal.route("/goal_data", methods=["GET", "POST"])
+@login_required
+def goal_data():
+    """
+    Process which goal edit button was clicked.
+
+    Pass back to client.
+    """
+    goal_id = None
+    goal = None
+    if request.method == "POST":
+        print("We postin")
+        goal_id = request.json.get("goalId")
+        print(f"Goal id: {goal_id}")
+    if request.method == "GET" and goal_id is not None:
+        goal = Goal.query.filter_by(id=goal_id)
+        print("We gettin")
+        data = {
+            "goalId": goal.id,
+            "goalCategory": goal.category,
+            "goalTarget": goal.goal,
+        }
+        print(f"Data: {data}")
+        return jsonify(data), 200
+    else:
+        print("I never hit an if block")
+        return jsonify({"msg": "No goal matches that id"})
