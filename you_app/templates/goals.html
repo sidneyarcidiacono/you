@@ -2,7 +2,6 @@
 
 {% block head %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/goal.js')}}" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -85,48 +84,16 @@
           {% endif %}
           <p class="card-text">You started working towards this goal on: {{ goal.start_date.strftime('%b %d, %Y') }}</p>
           <p class="card-text">You plan to achieve this goal by: {{ goal.end_date.strftime('%b %d, %Y') }}</p>
-          <div class="col-md-4 ml-auto">
-            <form onsubmit="postGoalData()">
-              <input type="hidden" name="goal_id" id="goal-id" value="{{ goal.id }}">
-              <button type="submit" class="btn btn-primary open-edit-goal">Edit Goal</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="modal" id="edit-goal-modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add a Goal!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" id="x-edit-button">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="{{ url_for('goal.edit_goal') }}" method="POST" id="edit-goal-form">
-                <div class="row w-100 justify-content-center">
-                  <div class="col-md-6">
-                    <legend>{{ goal.category }}</legend>
-                    <label for="goal-target">Update target?</label>
-                    <input type="number" name="goal-target" id="goal-target" value="{{ goal.goal }}">
-                    <label for="start-date">Start Date (mm-dd-yyyy)</label>
-                    <input class="form-control" type="date" name="start-date" id="start-date" placeholder="Date I start on this goal">
-                    <label for="end-date">End Date (mm-dd-yyyy)</label>
-                    <input class="form-control" type="date" name="end-date" id="end-date" placeholder="Date I accomplish it by">
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="save-edit-goal">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="stop-edit-goal">Close</button>
-              </form>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
   {% endfor %}
+  <div class="row w-100 justify-content-center">
+    <div class="col-md-4 ml-auto mr-auto text-center">
+      <button type="button" class="btn btn-primary open-edit-goal">Edit Goals</button>
+    </div>
+  </div>
   {% else %}
   <div class="row w-100 justify-content-center">
     <div class="col-md-6 text-center">

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid w-100 p-0">
+
+  <div class="row w-100 justify-content-center m-4">
+    <div class="col-md-6 justify-content-center text-center">
+
+      <h2 class="mb-4">Update Goals</h2>
+    </div>
+
+  {% if goals %}
+  {% for goal in goals %}
+  <div class="row w-100 justify-content-left">
+    <div class="col-md-4 mb-4">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">{{ goal.category }}</div>
+        <div class="card-body">
+          {% if goal.category == "Water Intake" %}
+          <h4 class="card-title">{{ goal.goal }} oz per day</h4>
+          {% elif goal.category == "Steps" %}
+          <h4 class="card-title">{{ goal.goal }} steps per day</h4>
+          {% elif goal.category == "Heart Rate" %}
+          <h4 class="card-title">{{ goal.goal }} beats per minute</h4>
+          {% elif goal.category == "Calories" %}
+          <h4 class="card-title">{{ goal.goal }} calories per day</h4>
+          {% elif goal.category == "Weight" %}
+          <h4 class="card-title">{{ goal.goal }} lbs</h4>
+          {% endif %}
+          <p class="card-text">You started working towards this goal on: {{ goal.start_date.strftime('%b %d, %Y') }}</p>
+          <p class="card-text">You plan to achieve this goal by: {{ goal.end_date.strftime('%b %d, %Y') }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form action="{{ url_for('goal.edit_goal') }}" method="POST">
+        <input class="form-control" type="hidden" name="goal-id" value="{{ goal.id }}">
+        <label class="mt-1 mb-0" for="goal-target">Goal Target</label>
+        <input class="form-control" type="number" name="goal-target" id="goal-target" value="{{ goal.goal }}">
+        <label class="mt-1 mb-0" for="start-date">Start Date (mm-dd-yyyy)</label>
+        <input class="form-control" type="date" name="start-date" id="start-date" value="{{ goal.start_date.strftime('%m-%d-%Y') }}">
+        <label class="mt-1 mb-0" for="end-date">End Date (mm-dd-yyyy)</label>
+        <input class="form-control" type="date" name="end-date" id="end-date" value="{{ goal.end_date.strftime('%m-%d-%Y') }}">
+      </form>
+    </div>
+    <div class="col-md-4 m-auto">
+      <button class="btn btn-secondary" type="submit">Update {{ goal.category }}</button>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock %}
