@@ -64,6 +64,20 @@ def edit_goal():
         return render_template("edit_goal.html", goals=goals)
     elif request.method == "POST":
         goal_id = request.form.get("goal-id")
-        print(goal_id)
+        new_goal_target = request.form.get("goal-target")
+        new_start_date = datetime.strptime(
+            request.form.get("start-date"), "%m-%d-%Y"
+        )
+        new_end_date = datetime.strptime(
+            request.form.get("end-date"), "%m-%d-%Y"
+        )
+        goal_to_update = Goal.query.filter_by(id=goal_id).first()
+        if new_goal_target != goal_to_update.goal:
+            goal_to_update.goal = new_goal_target
+        elif new_start_date != goal_to_update.start_date:
+            goal_to_update.start_date = new_start_date
+        elif new_end_date != goal_to_update.end_date:
+            goal_to_update.end_date = new_end_date
+        db.session.commit()
         flash("Goal successfully updated!")
-        return redirect(url_for("goal.goals"))
+        return redirect(url_for("goal.edit_goal"))

@@ -41,10 +41,10 @@
         <input class="form-control" type="date" name="start-date" id="start-date" value="{{ goal.start_date.strftime('%m-%d-%Y') }}">
         <label class="mt-1 mb-0" for="end-date">End Date (mm-dd-yyyy)</label>
         <input class="form-control" type="date" name="end-date" id="end-date" value="{{ goal.end_date.strftime('%m-%d-%Y') }}">
-      </form>
     </div>
     <div class="col-md-4 m-auto">
-      <button class="btn btn-secondary" type="submit">Update {{ goal.category }}</button>
+      <input class="btn btn-secondary" type="submit" value="Update {{ goal.category }}">
+    </form>
     </div>
   </div>
   {% endfor %}
