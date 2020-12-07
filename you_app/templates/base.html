@@ -35,6 +35,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('progress.progress_page') }}">Progress</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="open-checkin-modal">Check In</a>
+          </li>
           {% endif %}
         </ul>
         <!-- SETTINGS DROPDOWN -->
@@ -43,7 +46,6 @@
               alt="Gear icon" id="settings-dropdown"></a>
           <div class="dropdown-menu">
             <a href="{{ url_for('user.settings') }}" class="dropdown-item">Settings</a>
-            <button class="dropdown-item" id="open-checkin-modal">Check In</button>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ url_for('user.logout') }}">Log Out</a>
             {% else %}<button type="button" class="btn btn-primary" id="settings-dropdown">Get Started!</button></a>
