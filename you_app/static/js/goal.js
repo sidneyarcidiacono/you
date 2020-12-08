@@ -9,9 +9,6 @@ const closeModalBtn = document.getElementById('stop-add-goal')
 // Global constants for showing and hiding add goal form portions
 const category = document.getElementById('category-select')
 
-// Global constant to redirect to goal edit page
-const openEditGoalBtn = document.querySelector('.open-edit-goal')
-
 // Handlers for open and close add goal modal event listeners
 const backdropHandler = () => {
   backdrop.classList.toggle('visible')
@@ -57,11 +54,6 @@ const finishAddGoalHandler = () => {
 }
 
 category.addEventListener('change', finishAddGoalHandler)
-
-// Event listener for redirect to edit goal page
-openEditGoalBtn.addEventListener('click', () => {
-  window.location.href = '/edit_goal'
-})
 
 // Event listeners for opening and closing add goal modal
 addGoalBtn.addEventListener('click', addGoalModalHandler)
